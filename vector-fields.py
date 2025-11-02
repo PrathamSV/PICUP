@@ -1,4 +1,4 @@
-from math import pow, log
+
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.ndimage import zoom
@@ -24,6 +24,13 @@ from scipy.ndimage import zoom
 def create_vector_field(X, Y):
     Vx = np.log(1+np.pow(Y,2))
     Vy = np.log(1+np.pow(X,2))
+
+    #denom = np.power(X,2) + np.power(Y,2)
+    #Vx = X/denom
+    #Vy = Y/denom
+
+    #Vx = np.cos(X)
+    #Vy = np.sin(Y)
 
     return Vx, Vy, True
 
@@ -53,13 +60,13 @@ if __name__ == "__main__":
     divergence = dVx_dx + dVy_dy
     curl = dVy_dx - dVx_dy
     
-
+    extent = (col_extent[0], col_extent[1], row_extent[0], row_extent[1])
 
     plt.figure(figsize=(11, 9))
 
     plt.subplot(2, 2, 1).set_aspect('equal', adjustable='box')
     plt.title('Vector/Gradient Field V(x,y)')
-    plt.imshow(magnitude, extent=(col_extent[0], col_extent[1], row_extent[0], row_extent[1]), origin='lower', cmap='viridis')
+    plt.imshow(magnitude, extent=extent, origin='lower', cmap='viridis')
     plt.colorbar(label='V(x,y)')
     plt.quiver(zoom(X, quiver_zoom), zoom(Y, quiver_zoom), zoom(Vx, quiver_zoom), zoom(Vy, quiver_zoom), color='red')
 
@@ -69,14 +76,14 @@ if __name__ == "__main__":
 
     plt.subplot(2, 2, 3).set_aspect('equal', adjustable='box')
     plt.title('Divergence of V(x,y)')
-    plt.contourf(X, Y, divergence, extent=(col_extent[0], col_extent[1], row_extent[0], row_extent[1]), origin='lower',  cmap='plasma', levels=100)
+    plt.contourf(X, Y, divergence, extent=extent, origin='lower',  cmap='plasma', levels=100)
     plt.colorbar(label='Divergence')
 
     plt.subplot(2, 2, 4).set_aspect('equal', adjustable='box')
     plt.title('Curl of V(x,y)')
-    plt.contourf(X, Y, curl, extent=(col_extent[0], col_extent[1], row_extent[0], row_extent[1]), origin='lower',  cmap='viridis', levels=100)
+    plt.contourf(X, Y, curl, extent=extent, origin='lower',  cmap='viridis', levels=100)
     plt.colorbar(label='Curl')
-    plt.contour(X, Y, curl, extent=(col_extent[0], col_extent[1], row_extent[0], row_extent[1]), origin='lower', colors='black', linewidths=0.8)
+    plt.contour(X, Y, curl, extent=extent, origin='lower', colors='black', linewidths=0.8)
     
     plt.tight_layout()
     plt.show()
