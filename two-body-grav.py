@@ -1,3 +1,6 @@
+"""Adapted from:
+2-Body Gravitation - https://doi.org/10.1119/PICUP.Exercise.2bgrav"""
+
 from vpython import *
 import numpy as np
 import matplotlib.pyplot as plt
