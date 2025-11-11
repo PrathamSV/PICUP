@@ -155,9 +155,3 @@ golf_ball.plot_velocities(title_suffix='Golf Ball', xlim=xlim, ylim=ylim_vel)
 
 plt.tight_layout(w_pad=6, h_pad=3)
 plt.show()
-
-
-
-
-
-
