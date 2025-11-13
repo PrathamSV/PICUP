@@ -57,23 +57,19 @@ class Ball:
             plt.xlim(xlim)
         if ylim:
             plt.ylim(ylim)
-        plt.legend()
 
-    def plot_velocities(self, title_suffix='', xlim=None, ylim=None):
+    def plot_velocities(self, xlim=None, ylim=None):
         comp_velocities = self.get_computed_velocities()
         num_velocities = self.get_numerical_velocities()
 
         plt.plot(np.abs(comp_velocities), label='Computed Velocity', color='blue')
         plt.plot(num_velocities, label='Numerical Velocity', linestyle='--', color='green')
         plt.axhline(y=self.terminal_vel, color='red', linestyle=':', label='Terminal Velocity')
-        plt.title(f'Velocity vs Time ({title_suffix})')
-        plt.xlabel('Time Step (s)')
-        plt.ylabel('Velocity (m/s)')
+
         if xlim:
             plt.xlim(xlim)
         if ylim:
             plt.ylim(ylim)
-        plt.legend()
 
     def convert_arrays(self):
         self.comp_positions = np.array(self.comp_positions)
@@ -133,25 +129,15 @@ xlim = (0, max_time*1.1)
 ylim_vel = (0, max_terminal_vel*1.1)
 ylim_pos = (-max_pos*1.1, 0)
 
-plt.figure(figsize=(16, 10))
+plt.figure(figsize=(6, 6))
 
-plt.subplot(2, 3, 1)
-bowling_ball.plot_positions(title_suffix='Bowling Ball', xlim=xlim, ylim=ylim_pos)
+bowling_ball.plot_velocities(xlim=xlim, ylim=ylim_vel)
+basketball.plot_velocities(xlim=xlim, ylim=ylim_vel)
+golf_ball.plot_velocities(xlim=xlim, ylim=ylim_vel)
 
-plt.subplot(2, 3, 2)
-basketball.plot_positions(title_suffix='Basketball', xlim=xlim, ylim=ylim_pos)
-
-plt.subplot(2, 3, 3)
-golf_ball.plot_positions(title_suffix='Golf Ball', xlim=xlim, ylim=ylim_pos)
-
-plt.subplot(2, 3, 4)
-bowling_ball.plot_velocities(title_suffix='Bowling Ball', xlim=xlim, ylim=ylim_vel)
-
-plt.subplot(2, 3, 5)
-basketball.plot_velocities(title_suffix='Basketball', xlim=xlim, ylim=ylim_vel)
-
-plt.subplot(2, 3, 6)
-golf_ball.plot_velocities(title_suffix='Golf Ball', xlim=xlim, ylim=ylim_vel)
+plt.xlabel('Time Step (s)')
+plt.ylabel('Velocity (m/s)')
+plt.title('Velocity v/s Time')
 
 plt.tight_layout(w_pad=6, h_pad=3)
 plt.show()

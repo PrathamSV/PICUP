@@ -9,13 +9,6 @@ def create_vector_field(X, Y):
     Vx = np.log(1+np.pow(Y,2))
     Vy = np.log(1+np.pow(X,2))
 
-    #denom = np.power(X,2) + np.power(Y,2)
-    #Vx = X/denom
-    #Vy = Y/denom
-
-    #Vx = np.cos(X)
-    #Vy = np.sin(Y)
-
     return Vx, Vy, True
 
 
